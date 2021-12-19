@@ -21,6 +21,7 @@
 #include "src/gui/EditInterface.hpp"
 #include "src/game/Camera.hpp"
 #include "src/game/State.hpp"
+#include "src/database/Context.hpp"
 
 #include <iostream>
 #include <list>
@@ -48,7 +49,12 @@ int main()
   int tileSize = 20;
   
   // Default to fullscreen
-  InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+  InitWindow(screenWidth, screenHeight, "Microcosim");
+  
+  //TODO: Create database once
+  //database::Context db;
+  //db.InitDB();
+  
   int display = GetCurrentMonitor();
   //ToggleFullscreen();
   //No 4K gaming for nowx

@@ -4,6 +4,7 @@
 #include "src/item/ItemIdentifier.hpp"
 #include "src/controller/Mouse.hpp"
 #include "src/area/Area.hpp"
+#include "src/area/Storage.hpp"
 #include "src/game/State.hpp"
 #include "raylib.h"
 #include <vector>
@@ -182,16 +183,18 @@ namespace Map {
         //Make Area
 
         //TODO:: Block addition of tile to multiple rooms
-        if (*GameState->_Mode == game::Mode::EDIT && *GameState->_AreaType == game::AreaType::ROOM){ 
+        if (*GameState->_Mode == game::Mode::EDIT){ 
           if(*GameState->_AreaMode == game::AreaMode::NEW) {
             if(*GameState->_AreaType == game::AreaType::ROOM) {
+              auto area = std::shared_ptr<area::BaseArea>(new area::BaseArea());
+              area->AddTiles(*SelectedTiles);
+              Areas->push_back(area);
 
             } else if (*GameState->_AreaType == game::AreaType::STORAGE) {
-
+              auto area = std::shared_ptr<area::Storage>(new area::Storage());
+              area->AddTiles(*SelectedTiles);
+              Areas->push_back(area);
             }
-            auto area = std::shared_ptr<area::BaseArea>(new area::BaseArea());
-            area->AddTiles(*SelectedTiles);
-            Areas->push_back(area);
             *GameState->_AreaMode = game::AreaMode::SELECT;
           }
           if(*GameState->_AreaMode == game::AreaMode::EDIT && SelectedArea) {

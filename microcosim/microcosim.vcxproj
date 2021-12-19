@@ -401,6 +401,11 @@
     <ClInclude Include="src\threading\ThreadManager.hpp" />
     <ClInclude Include="src\units\Units.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="main.db" />
+    <None Include="src\database\init.sql" />
+    <None Include="src\database\rollback.sql" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -45,12 +45,13 @@ namespace database {
   }
 
   bool Context::FinishSqlConn(sqlite3** db, sqlite3_stmt** stmt) {
-    int rc = 0;
+    /*int rc = 0;
     if (rc != SQLITE_DONE) {
       printf("error: ", sqlite3_errmsg(*db));
       return false;
-    }
+    }*/
     sqlite3_finalize(*stmt);
+    sqlite3_close_v2(*db);
     return true;
   }
 

@@ -12,6 +12,7 @@ namespace Item {
 namespace area {
   class Storage : public BaseArea {
     public:
+      Storage();
       std::shared_ptr<std::unordered_map<std::string, int>> AcceptedItems;
 
       std::string GetAllFamilyFilter(Item::ItemIdentifier item);

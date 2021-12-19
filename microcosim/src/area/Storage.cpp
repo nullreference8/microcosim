@@ -2,10 +2,14 @@
 #include "src/map/Tile.hpp"
 #include "src/inventory/Inventory.hpp"
 #include "src/area/Storage.hpp"
+#include "src/game/State.hpp"
 #include <unordered_map>
 #include <string>
 
 namespace area {
+  Storage::Storage() {
+    AreaType = game::AreaType::STORAGE;
+  }
   std::string Storage::GetAllFamilyFilter(Item::ItemIdentifier item) {
     return item.Family + ":ALL";
   }

@@ -1,7 +1,7 @@
 #ifndef GUIRIGHTINTERFACE_HPP
 #define GUIRIGHTINTERFACE_HPP
 #include <memory>
-#include <list>
+#include <vector>
 
 namespace game {
   class State;
@@ -13,6 +13,11 @@ namespace Controller {
 
 namespace Map {
   class Grid;
+}
+
+namespace Item {
+  class Repository;
+  class ItemIdentifier;
 }
 
 namespace gui {
@@ -28,6 +33,8 @@ namespace gui {
 
       std::shared_ptr<game::State> GameState;
       std::shared_ptr<Map::Grid> Grid;
+      std::shared_ptr<Item::Repository> ItemRepo;
+      std::shared_ptr<std::vector<Item::ItemIdentifier>> Families;
 
       void Draw(std::shared_ptr<Controller::Mouse> mouse);
   };
