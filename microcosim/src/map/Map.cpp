@@ -186,7 +186,8 @@ namespace Map {
         if (*GameState->_Mode == game::Mode::EDIT){ 
           if(*GameState->_AreaMode == game::AreaMode::NEW) {
             if(*GameState->_AreaType == game::AreaType::ROOM) {
-              auto area = std::shared_ptr<area::BaseArea>(new area::BaseArea());
+              //TODO: Make ROoms
+              auto area = std::shared_ptr<area::BaseArea>(new area::Storage());
               area->AddTiles(*SelectedTiles);
               Areas->push_back(area);
 

@@ -7,7 +7,7 @@
 
 namespace Item {
   class ItemIdentifier;
-  enum class MatchDegree { FAMILY, ORDER, TYPE, EXACT };
+  enum class MatchDegree { FAMILY, ORDER, TYPE, FORM, EXACT };
   
   class BaseItem {
     public:

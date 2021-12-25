@@ -18,9 +18,14 @@ namespace area {
     return item.Family + ":" + item.Order + ":ALL";
   }
 
-  std::string Storage::GetAllFormFilter(Item::ItemIdentifier item) {
-    return item.Family + ":" + item.Order + ":" + item.Form + ":ALL";
+  std::string Storage::GetAllTypeFilter(Item::ItemIdentifier item) {
+    return item.Family + ":" + item.Order + ":" + item.Type + ":ALL";
   }
+
+  std::string Storage::GetAllFormFilter(Item::ItemIdentifier item) {
+    return item.Family + ":" + item.Order + ":" + item.Type + ":" + item.Form + ":ALL";
+  }
+
 
   void Storage::SetItemFilter(Item::ItemIdentifier item, int quantity) {
     auto itemFilter = item.GetHashString();
@@ -37,6 +42,11 @@ namespace area {
     (*AcceptedItems)[orderFilter] = 1;
   }
 
+  void Storage::SetAllTypeFilter(Item::ItemIdentifier item) {
+    auto typeFilter = GetAllTypeFilter(item);
+    (*AcceptedItems)[typeFilter] = 1;
+  }
+
   void Storage::SetAllFormFilter(Item::ItemIdentifier item) {
     auto formFilter = GetAllFormFilter(item);
     (*AcceptedItems)[formFilter] = 1;
@@ -47,7 +57,14 @@ namespace area {
     AcceptedItems->erase(itemFilter);
   }
 
+  void Storage::RemoveItemFilter(std::string itemFilterString) {
+    AcceptedItems->erase(itemFilterString);
+  }
+
   bool Storage::AcceptsItem(Item::ItemIdentifier item) {
+    if (!AcceptedItems) {
+      return false;
+    }
     auto familyFilter = GetAllFamilyFilter(item);
     if (AcceptedItems->find(familyFilter) != AcceptedItems->end()) {
       return true;

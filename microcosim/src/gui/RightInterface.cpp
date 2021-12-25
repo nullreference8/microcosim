@@ -8,6 +8,8 @@
 #include "src/game/State.hpp"
 #include "src/item/Repository.hpp"
 #include "src/item/ItemIdentifier.hpp"
+#include "src/item/Item.hpp"
+#include "src/gui/StorageFilterButton.hpp"
 namespace gui {
   RightInterface::RightInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<Map::Grid> grid, int screenWidth, int screenHeight) {
     RightInterfaceStartX = screenWidth - 300;
@@ -29,7 +31,9 @@ namespace gui {
         int spacing = 10;
         int count = 0;
         for (auto& family : *Families) {
-          DrawText(family.Family.c_str(), RightInterfaceStartX + 10, yPos + (spacing * count), 12, BLACK);
+          auto strg = std::dynamic_pointer_cast<area::Storage>(Grid->SelectedArea);
+          auto btn = gui::StorageFilterButton(strg, family, Item::MatchDegree::FAMILY, RightInterfaceStartX + 10, yPos + (spacing * count), RightInterfaceStartX + 100, yPos + 100 + (spacing * count), family.Family, BLACK);
+          btn.Draw(mouse);
           count++;
         }
       }

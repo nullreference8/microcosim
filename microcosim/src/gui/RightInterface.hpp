@@ -18,6 +18,7 @@ namespace Map {
 namespace Item {
   class Repository;
   class ItemIdentifier;
+  enum class MatchDegree;
 }
 
 namespace gui {

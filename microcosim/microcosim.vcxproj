@@ -346,6 +346,7 @@
     <ClCompile Include="src\gui\Button.cpp" />
     <ClCompile Include="src\gui\EditInterface.cpp" />
     <ClCompile Include="src\gui\RightInterface.cpp" />
+    <ClCompile Include="src\gui\StorageFilterButton.cpp" />
     <ClCompile Include="src\gui\TextInput.cpp" />
     <ClCompile Include="src\gui\ToggleButton.cpp" />
     <ClCompile Include="src\gui\TriButton.cpp" />
@@ -381,6 +382,7 @@
     <ClInclude Include="src\gui\Button.hpp" />
     <ClInclude Include="src\gui\EditInterface.hpp" />
     <ClInclude Include="src\gui\EnumButton.hpp" />
+    <ClInclude Include="src\gui\StorageFilterButton.hpp" />
     <ClInclude Include="src\gui\RightInterface.hpp" />
     <ClInclude Include="src\gui\TextInput.hpp" />
     <ClInclude Include="src\gui\ToggleButton.hpp" />
