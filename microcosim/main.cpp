@@ -16,9 +16,7 @@
 #include "src/gui/ToggleButton.hpp"
 #include "src/gui/EnumButton.hpp"
 #include "src/gui/Button.hpp"
-#include "src/gui/BottomInterface.hpp"
-#include "src/gui/RightInterface.hpp"
-#include "src/gui/EditInterface.hpp"
+#include "src/gui/interface/GameInterface.hpp"
 #include "src/game/Camera.hpp"
 #include "src/game/State.hpp"
 #include "src/database/Context.hpp"
@@ -125,9 +123,7 @@ int main()
   std::string keysPressed = "";
 
   //GUI Elements
-  gui::BottomInterface bottomInterface(GameState, screenWidth, screenHeight);
-  gui::RightInterface rightInterface(GameState, gridPtr, screenWidth, screenHeight);
-  gui::EditInterface editInterface(GameState, screenWidth, screenHeight);
+  gui::GameInterface gameInterface(GameState, gridPtr, screenWidth, screenHeight);
 
   while (!WindowShouldClose())
   { // Detect window close button or ESC key
@@ -144,18 +140,15 @@ int main()
           screenHeight = 1080;
         }
         SetWindowSize(screenWidth, screenHeight);
-        editInterface = gui::EditInterface(GameState, screenWidth, screenHeight);
-        bottomInterface = gui::BottomInterface(GameState, screenWidth, screenHeight);
+
       } else {
         screenWidth = screenWidthDefault;
         screenHeight = screenHeightDefault;
         SetWindowSize(screenWidth, screenHeight);
-        editInterface = gui::EditInterface(GameState, screenWidth, screenHeight);
-        bottomInterface = gui::BottomInterface(GameState, screenWidth, screenHeight);
       }
     }
     gameTime = (std::clock() - start) / (double)CLOCKS_PER_SEC;
-
+    gameInterface.Draw(mouse);
     // Update
     //----------------------------------------------------------------------------------
     // Update your variables here
@@ -305,11 +298,8 @@ int main()
       //EndMode2D();
 
       //Menu items
-      bottomInterface.Draw(mouse);
-      rightInterface.Draw(mouse);
-      if (*GameState->_Mode == game::Mode::EDIT) {
-        editInterface.Draw(mouse);
-      }
+
+      gameInterface.Clear();
 
 
       debugText.PrintAndClear();

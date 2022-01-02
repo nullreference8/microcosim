@@ -1,19 +1,12 @@
 #include "src/gui/Button.hpp"
 #include "src/controller/Mouse.hpp"
-#include "raylib.h"
 namespace gui {
-  Button::Button(int startX, int startY, int endX, int endY, std::string label, Color color) {
-    StartX = startX;
-    StartY = startY;
-    EndX = endX;
-    EndY = endY;
+  Button::Button(Rectangle position, std::string label, Color color) {
+    Position = position;
     Label = label;
     BackgroundColor = std::shared_ptr<Color>(new Color);
     *BackgroundColor = color;
-    Width = EndX - StartX;
-    Height = EndY - StartY;
-    WidthCenter = startX + (Width / 2);
-    HeightCenter = startY + (Height / 2);
+
   }
 
   void Button::CheckClicked(std::shared_ptr<Controller::Mouse> mouse) {
@@ -36,16 +29,13 @@ namespace gui {
 
   void Button::Draw(std::shared_ptr<Controller::Mouse> mouse) {
     initActions(mouse);
-    DrawRectangle(StartX, StartY, Width, Height, *BackgroundColor);
+    DrawRectangle(Position.x, Position.y, Position.width, Position.height, *BackgroundColor);
     auto color = BLACK;
-    DrawText(Label.c_str(), StartX + 5, StartY + 5, 10, color);
+    DrawText(Label.c_str(), Position.x + 5, Position.y + 5, 10, color);
   }
 
-  void Button::UpdatePosition(int startX, int startY, int endX, int endY) {
-    StartX = startX;
-    StartY = startY;
-    EndX = endX;
-    EndY = endY;
+  void Button::UpdatePosition(Rectangle position) {
+    Position = position;
   }
 
   void Button::initActions(std::shared_ptr<Controller::Mouse> mouse) {
@@ -60,7 +50,7 @@ namespace gui {
   }
 
   bool Button::isMouseInBounds(std::shared_ptr<Controller::Mouse> mouse) {
-    if (mouse->MouseX > StartX && mouse->MouseX < EndX && mouse->MouseY > StartY && mouse->MouseY < EndY) {
+    if (mouse->MouseX > Position.x && mouse->MouseX < Position.x + Position.width && mouse->MouseY > Position.y && mouse->MouseY < Position.y + Position.height) {
       return true;
     }
     return false;

@@ -1,7 +1,7 @@
 #ifndef GUIBOTTOMINTERFACE_HPP
 #define GUIBOTTOMINTERFACE_HPP
 #include <memory>
-#include <list>
+#include <unordered_map>
 
 namespace game {
   enum class Mode;
@@ -17,15 +17,13 @@ namespace Controller {
 namespace gui {
   template<class T>
   class EnumButton;
-
+  enum class InterfaceName;
   class BottomInterface{
     public:
       BottomInterface(std::shared_ptr<game::State> gameState, int screenWidth, int screenHeight);
 
-      int BottomInterfaceStartX;
-      int BottomInterfaceStartY;
-      int BottomInterfaceEndX;
-      int BottomInterfaceEndY;
+      Rectangle Position;
+      Rectangle MouseBlockingPosition;
 
       std::shared_ptr<game::State> GameState;
 
@@ -40,6 +38,7 @@ namespace gui {
       std::shared_ptr<gui::EnumButton<game::AreaEditMode>> ButtonAreaEditModeRemove;
 
       void Draw(std::shared_ptr<Controller::Mouse> mouse);
+      void Clear();
   };
 }
 #endif

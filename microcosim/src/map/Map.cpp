@@ -137,17 +137,21 @@ namespace Map {
         MouseYIndex = mouse->MouseY / TileSize;
 
         if (mouse->IsMouseLeftPressed) {
-          unselectTiles();
+          if (!GameState->ActiveInterfaceClicked(mouse)) {
+            unselectTiles();
+          }
+          
           
           if (*GameState->_Mode == game::Mode::EDIT 
           && *GameState->_AreaMode == game::AreaMode::SELECT 
-          && mouse->MouseY < 500) {
+          && !GameState->ActiveInterfaceClicked(mouse)) {
             for (auto& area : *Areas) {
               if(area->LookupTile(MouseXIndex, MouseYIndex)) {
                 SelectedArea = area;
                 break;
               }
               SelectedArea = nullptr;
+                          
             }
           } 
           

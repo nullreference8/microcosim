@@ -4,8 +4,8 @@
 #include "src/area/Storage.hpp"
 #include "raylib.h"
 namespace gui {
-  StorageFilterButton::StorageFilterButton(std::shared_ptr<area::Storage> storageArea, Item::ItemIdentifier itemIdentifier, Item::MatchDegree matchDegree, int startX, int startY, int endX, int endY, std::string text, Color color)
-    : Button(startX + 20, startY, endX, endY, text, color) {
+  StorageFilterButton::StorageFilterButton(std::shared_ptr<area::Storage> storageArea, Item::ItemIdentifier itemIdentifier, Item::MatchDegree matchDegree, Rectangle position, std::string text, Color color)
+    : Button(position, text, color) {
     StorageArea = storageArea;
     ItemIdentifier = std::make_shared<Item::ItemIdentifier>(itemIdentifier);
     _MatchDegree = std::make_shared<Item::MatchDegree>(matchDegree);
@@ -52,10 +52,10 @@ namespace gui {
   void StorageFilterButton::Draw(std::shared_ptr<Controller::Mouse> mouse) {
     Button::Draw(mouse);
     if (StorageArea->AcceptsItem(*ItemIdentifier)) {
-      DrawRectangle(StartX, StartY, StartX + 10, StartY + 10, GREEN);
+      DrawRectangle(Position.x, Position.y, 20, 20, GREEN);
     }
     else {
-      DrawRectangle(StartX, StartY, StartX + 10, StartY + 10, WHITE);
+      DrawRectangle(Position.x, Position.y, 20, 20, RED);
     }
   };
 }

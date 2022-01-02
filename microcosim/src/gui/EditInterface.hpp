@@ -16,6 +16,9 @@ namespace gui {
     public:
       EditInterface(std::shared_ptr<game::State> gameState, int screenWidth, int screenHeight);
 
+      Rectangle Position;
+      Rectangle MouseBlockingPosition;
+
       int EditInterfaceStartX;
       int EditInterfaceStartY;
       int EditInterfaceEndX;
@@ -27,6 +30,7 @@ namespace gui {
       std::shared_ptr<gui::EnumButton<game::AreaType>> ButtonStorage;
 
       void Draw(std::shared_ptr<Controller::Mouse> mouse);
+      void Clear();
   };
 }
 #endif

@@ -8,7 +8,7 @@ namespace gui {
   template <class T>
   class EnumButton : public Button {
     public:
-      EnumButton(std::shared_ptr<T> enumTarget, T enumValue, T defaultValue, int startX, int startY, int endX, int endY, std::string text, Color color);
+      EnumButton(std::shared_ptr<T> enumTarget, T enumValue, T defaultValue, Rectangle position, std::string text, Color color);
       std::shared_ptr<T> EnumTarget;
       T EnumValue;
       T DefaultValue;
@@ -18,8 +18,8 @@ namespace gui {
   };
   
   template <class T>
-  EnumButton<T>::EnumButton(std::shared_ptr<T> enumTarget, T enumValue, T defaultValue, int startX, int startY, int endX, int endY, std::string text, Color color) 
-  : Button(startX, startY, endX, endY, text, color) {
+  EnumButton<T>::EnumButton(std::shared_ptr<T> enumTarget, T enumValue, T defaultValue, Rectangle position, std::string text, Color color) 
+  : Button(position, text, color) {
     EnumTarget = enumTarget;
     EnumValue = enumValue;
     DefaultValue = defaultValue;
@@ -43,9 +43,9 @@ namespace gui {
   void EnumButton<T>::Draw(std::shared_ptr<Controller::Mouse> mouse) {
     Button::Draw(mouse);
     if (*EnumTarget == EnumValue) {
-      DrawText("Active", StartX + 5, EndY - 15, 10, BLACK);
+      DrawText("Active", Position.x + 5, Position.y + Position.height - 15, 10, BLACK);
     } else {
-      DrawText("Inactive", StartX + 5, EndY - 15, 10, BLACK);
+      DrawText("Inactive", Position.x + 5, Position.y + Position.height - 15, 10, BLACK);
     }
   }
 }

@@ -2,8 +2,8 @@
 #include "raylib.h"
 
 namespace gui {
-  ToggleButton::ToggleButton(std::shared_ptr<bool> booleanTarget, int startX, int startY, int endX, int endY, std::string text, Color color) 
-  : Button(startX, startY, endX, endY, text, color) {
+  ToggleButton::ToggleButton(std::shared_ptr<bool> booleanTarget, Rectangle position, std::string text, Color color) 
+  : Button(position, text, color) {
     BooleanTarget = booleanTarget;
   }
 
@@ -18,9 +18,9 @@ namespace gui {
   void ToggleButton::Draw(std::shared_ptr<Controller::Mouse> mouse) {
     Button::Draw(mouse);
     if (*BooleanTarget) {
-      DrawText("Active", StartX + 5, EndY - 15, 10, BLACK);
+      DrawText("Active", Position.x + 5, Position.y + Position.height - 15, 10, BLACK);
     } else {
-      DrawText("Inactive", StartX + 5, EndY - 15, 10, BLACK);
+      DrawText("Inactive", Position.x + 5, Position.y + Position.height - 15, 10, BLACK);
     }
   }
 }

@@ -12,7 +12,7 @@ namespace Item {
 namespace gui {
   class StorageFilterButton : public Button {
   public:
-    StorageFilterButton(std::shared_ptr<area::Storage> storageArea, Item::ItemIdentifier itemIdentifier, Item::MatchDegree matchDegree, int startX, int startY, int endX, int endY, std::string text, Color color);
+    StorageFilterButton(std::shared_ptr<area::Storage> storageArea, Item::ItemIdentifier itemIdentifier, Item::MatchDegree matchDegree, Rectangle position, std::string text, Color color);
     std::shared_ptr<area::Storage> StorageArea;
     std::shared_ptr<Item::ItemIdentifier> ItemIdentifier;
     std::shared_ptr<Item::MatchDegree> _MatchDegree;

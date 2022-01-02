@@ -12,7 +12,7 @@ namespace Controller {
 namespace gui {
   class TriButton : public Button {
     public:
-      TriButton(std::shared_ptr<int> intTarget, int startX, int startY, int endX, int endY, std::string text, Color color);
+      TriButton(std::shared_ptr<int> intTarget, Rectangle position, std::string text, Color color);
       std::shared_ptr<int> IntTarget;
       void ClickAction();
       void HoverAction();

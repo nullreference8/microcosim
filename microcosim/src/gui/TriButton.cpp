@@ -4,8 +4,8 @@
 #include <memory>
 
 namespace gui {
-  TriButton::TriButton(std::shared_ptr<int> intTarget, int startX, int startY, int endX, int endY, std::string text, Color color)
-  : Button(startX + 20, startY, endX, endY, text, color) {
+  TriButton::TriButton(std::shared_ptr<int> intTarget, Rectangle position, std::string text, Color color)
+  : Button(position, text, color) {
     IntTarget = intTarget;
   };
   void TriButton::ClickAction() {
@@ -23,13 +23,13 @@ namespace gui {
   void TriButton::Draw(std::shared_ptr<Controller::Mouse> mouse) {
     Button::Draw(mouse);
     if (*IntTarget == 0) {
-      DrawRectangle(StartX, StartY, StartX + 10, StartY + 10, WHITE);
+      DrawRectangle(Position.x, Position.y, Position.x + 10, Position.y + 10, WHITE);
     }
     else if (*IntTarget == 1) {
-      DrawRectangle(StartX, StartY, StartX + 10, StartY + 10, GREEN);
+      DrawRectangle(Position.x, Position.y, Position.x + 10, Position.y + 10, GREEN);
     }
     else if (*IntTarget == 2) {
-      DrawRectangle(StartX, StartY, StartX + 10, StartY + 10, ORANGE);
+      DrawRectangle(Position.x, Position.y, Position.x + 10, Position.y + 10, ORANGE);
     }
   };
 }

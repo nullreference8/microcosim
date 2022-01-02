@@ -27,6 +27,8 @@ namespace gui {
     public:
       RightInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<Map::Grid> grid, int screenWidth, int screenHeight);
 
+      Rectangle Position;
+
       int RightInterfaceStartY;
       int RightInterfaceStartX;
       int RightInterfaceEndX;
@@ -38,6 +40,7 @@ namespace gui {
       std::shared_ptr<std::vector<Item::ItemIdentifier>> Families;
 
       void Draw(std::shared_ptr<Controller::Mouse> mouse);
+      void Clear();
   };
 }
 #endif
