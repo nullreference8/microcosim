@@ -11,7 +11,7 @@ namespace Threading {
   class Manager;
 }
 
-namespace Jobs {
+namespace job {
   class Manager {
     public:
       void RunJobTasks(std::shared_ptr<Units::Unit> unitList);
@@ -19,7 +19,7 @@ namespace Jobs {
   };
   class ManagerFactory {
     public:
-      std::shared_ptr<Jobs::Manager> Create(std::shared_ptr<Threading::Manager> _tm);
+      std::shared_ptr<job::Manager> Create(std::shared_ptr<Threading::Manager> _tm);
   };
 }
 #endif

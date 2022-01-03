@@ -1,4 +1,4 @@
-#include "src/job/Jobs.hpp"
+#include "src/job/RemoveItemTask.hpp"
 #include "src/units/Units.hpp"
 #include "src/inventory/Inventory.hpp" 
 #include "src/threading/ThreadManager.hpp"
@@ -7,8 +7,8 @@
 #include "src/item/Item.hpp"
 #include <memory>
 
-namespace Jobs { 
-  std::shared_ptr<Jobs::ITask> RemoveItemTaskFactory::Create(std::shared_ptr<Map::Grid> _grid, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _identifier, std::shared_ptr<Item::MatchDegree> _degree) {
+namespace job { 
+  std::shared_ptr<job::ITask> RemoveItemTaskFactory::Create(std::shared_ptr<Map::Grid> _grid, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _identifier, std::shared_ptr<Item::MatchDegree> _degree) {
     RemoveItemTask task;
     task.Grid = _grid;
     task.Unit = _unit; 

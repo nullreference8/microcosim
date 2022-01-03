@@ -19,6 +19,7 @@ namespace gui {
         } else {
           StorageArea->RemoveItemFilter(StorageArea->GetAllFamilyFilter(*ItemIdentifier));
         }
+        break;
       }
       case Item::MatchDegree::ORDER: {
         if (!StorageArea->AcceptsItem(*ItemIdentifier)) {
@@ -26,6 +27,7 @@ namespace gui {
         } else {
           StorageArea->RemoveItemFilter(StorageArea->GetAllOrderFilter(*ItemIdentifier));
         }
+        break;
       }
       case Item::MatchDegree::TYPE: {
         if (!StorageArea->AcceptsItem(*ItemIdentifier)) {
@@ -33,6 +35,7 @@ namespace gui {
         } else {
           StorageArea->RemoveItemFilter(StorageArea->GetAllTypeFilter(*ItemIdentifier));
         }
+        break;
       }
       case Item::MatchDegree::FORM: {
         if (!StorageArea->AcceptsItem(*ItemIdentifier)) {
@@ -40,6 +43,7 @@ namespace gui {
         } else {
           StorageArea->RemoveItemFilter(StorageArea->GetAllFormFilter(*ItemIdentifier));
         }
+        break;
       }
       default: {
         break;

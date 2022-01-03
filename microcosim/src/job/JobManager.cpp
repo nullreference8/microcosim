@@ -2,12 +2,15 @@
 #include "src/threading/ThreadManager.hpp"
 #include "src/units/Units.hpp"
 #include "src/job/Jobs.hpp"
-namespace Jobs {
+#include "src/job/FindItemMapTask.hpp"
+#include "src/job/FindPathTask.hpp"
+#include "src/job/RemoveItemTask.hpp"
+namespace job {
 
-  std::shared_ptr<Jobs::Manager> ManagerFactory::Create(std::shared_ptr<Threading::Manager> _tm) {
-    Jobs::Manager manager;
+  std::shared_ptr<job::Manager> ManagerFactory::Create(std::shared_ptr<Threading::Manager> _tm) {
+    job::Manager manager;
     manager.tm = _tm;
-    return std::make_shared<Jobs::Manager>(manager);
+    return std::make_shared<job::Manager>(manager);
   };
 
   void Manager::RunJobTasks(std::shared_ptr<Units::Unit> unit) {
@@ -15,15 +18,15 @@ namespace Jobs {
       auto taskRequests = unit->jobs.back()->TaskRequests;
       auto tr = taskRequests.back();
       if (tr.Name == "FindContent") {
-        Jobs::FindContentTaskFactory factory;
+        job::FindItemMapTaskFactory factory;
         auto res = factory.Create(tr.Grid, unit, tr.Identifier);
         unit->currentTask = res;
       } else if (tr.Name == "FindPath") {
-        Jobs::FindPathTaskFactory factory;
+        job::FindPathTaskFactory factory;
         auto res = factory.Create(tr.Grid, unit);
         unit->currentTask = res;
       } else if (tr.Name == "RemoveItem") {
-        Jobs::RemoveItemTaskFactory factory;
+        job::RemoveItemTaskFactory factory;
         auto res = factory.Create(tr.Grid, unit, tr.Identifier, tr.Degree);
         unit->currentTask = res;
       }

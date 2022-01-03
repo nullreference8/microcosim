@@ -1,10 +1,10 @@
-#include "src/job/Jobs.hpp"
+#include "src/job/FindPathTask.hpp"
 #include "src/units/Units.hpp"
 #include "src/map/Map.hpp"
 #include <memory>
 
-namespace Jobs {
-  std::shared_ptr<Jobs::ITask> FindPathTaskFactory::Create(std::shared_ptr<Map::Grid> _grid, std::shared_ptr<Units::Unit> _unit) {
+namespace job {
+  std::shared_ptr<job::ITask> FindPathTaskFactory::Create(std::shared_ptr<Map::Grid> _grid, std::shared_ptr<Units::Unit> _unit) {
     FindPathTask task;
     task.Grid = _grid;
     task.Unit = _unit;

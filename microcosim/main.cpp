@@ -90,8 +90,8 @@ int main()
     unit->travelSpeedMPS = 1.00;
     unit->currentPathIndex = 0;
     unit->inventory = std::shared_ptr<Inventory::InventoryContents>(new Inventory::InventoryContents);
-    auto job = std::shared_ptr<Jobs::Job>(new Jobs::Job);
-    Jobs::TaskRequest taskRequest3;
+    auto job = std::shared_ptr<job::Job>(new job::Job);
+    job::TaskRequest taskRequest3;
     taskRequest3.Name = "RemoveItem";
     taskRequest3.Grid = gridPtr;
     taskRequest3.Identifier = searchTarget;
@@ -101,11 +101,11 @@ int main()
     identifier->Order = "Wood";
     taskRequest3.Identifier = identifier;
     job->TaskRequests.push_back(taskRequest3);
-    Jobs::TaskRequest taskRequest2;
+    job::TaskRequest taskRequest2;
     taskRequest2.Name = "FindPath";
     taskRequest2.Grid = gridPtr;
     job->TaskRequests.push_back(taskRequest2);
-    Jobs::TaskRequest taskRequest;
+    job::TaskRequest taskRequest;
     taskRequest.Name = "FindContent";
     taskRequest.Identifier = searchTarget;
     taskRequest.Grid = gridPtr;
@@ -116,7 +116,7 @@ int main()
 
   auto mov = std::shared_ptr<Movement::Generator>(new Movement::Generator);
 
-  Jobs::ManagerFactory factory;
+  job::ManagerFactory factory;
   auto jm = factory.Create(tm);
 
   // Main game loop
@@ -228,7 +228,6 @@ int main()
         }
       }
 
-      //DrawRectangle(100, 100, tileSize, tileSize, RAYWHITE);
 
       // Unit Loop
       for (auto &unit : *unitList)

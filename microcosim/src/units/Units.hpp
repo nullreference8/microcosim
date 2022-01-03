@@ -2,6 +2,8 @@
 #define UNITS_HPP
 
 #include "src/pathing/AStar.hpp"
+#include "src/job/Jobs.hpp"
+#include "src/job/ITask.hpp"
 #include <list>
 #include <memory>
 
@@ -35,8 +37,8 @@ namespace Units {
       int currentPathIndex;
       AStar::Generator* generator;
       std::shared_ptr<Inventory::InventoryContents> inventory;
-      std::vector<std::shared_ptr<Jobs::Job>> jobs;
-      std::shared_ptr<Jobs::ITask> currentTask;
+      std::vector<std::shared_ptr<job::Job>> jobs;
+      std::shared_ptr<job::ITask> currentTask;
       //Jobs::ITask* currentTask;
       void find_path();
       void set_next_move_time(double gameTime);

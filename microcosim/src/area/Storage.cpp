@@ -9,6 +9,7 @@
 namespace area {
   Storage::Storage() {
     AreaType = game::AreaType::STORAGE;
+    AcceptedItems = std::shared_ptr<std::unordered_map<std::string, int>>(new std::unordered_map<std::string, int>{});
   }
   std::string Storage::GetAllFamilyFilter(Item::ItemIdentifier item) {
     return item.Family + ":ALL";
