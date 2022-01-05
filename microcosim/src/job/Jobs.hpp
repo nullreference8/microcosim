@@ -14,18 +14,10 @@ namespace Item {
 }
 
 namespace job {
-  
-  class TaskRequest {
-    public:
-      std::string Name;
-      std::shared_ptr<Map::Grid> Grid;
-      std::shared_ptr<Item::ItemIdentifier> Identifier;
-      std::shared_ptr<Item::MatchDegree> Degree;
-  };
-
+  class ITask;
   class Job {
-      public:
-        std::vector<TaskRequest> TaskRequests;
+    public:
+      std::vector<std::shared_ptr<job::ITask>> Tasks;
   };
 }
 #endif

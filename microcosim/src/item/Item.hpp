@@ -2,7 +2,7 @@
 #define ITEM_HPP
 
 #include <memory>
-#include <map>
+#include <vector>
 #include <string>
 
 namespace Item {
@@ -19,7 +19,7 @@ namespace Item {
   class Resource : public BaseItem {
     public:
       int PercentProcessed;
-      std::shared_ptr<std::map<std::shared_ptr<Item::ItemIdentifier>, int>> DeconstructionYieldMap;
+      std::shared_ptr<std::vector<Item::ItemIdentifier>> DeconstructionList;
   };
 
   class Order : public Resource {

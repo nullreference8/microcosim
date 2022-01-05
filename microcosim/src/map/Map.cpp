@@ -58,14 +58,15 @@ namespace Map {
           } else if (k == 2) {
             tile.isStorage = true;
           } else if (k == 3) {
-            auto tree = std::shared_ptr<Item::Tree>(new Item::Tree);
-            tree->Diameter = 9001;
             Item::ItemIdentifier item;
             item.Family = "Resource";
             item.Order = "Wood";
             item.Type = "Maple";
-            tree->Identifier = std::make_shared<Item::ItemIdentifier>(item);
+            item.Form = "Tree";
+            Item::ResourceFactory factory;
+            auto tree = factory.Create(item);
             tile.InventoryContents->AddItem(tree);
+            
             /*Inventory::Content content;
             content.Family = "Resource";
             content.Order = "Wood";

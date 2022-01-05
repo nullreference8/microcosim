@@ -20,6 +20,10 @@
 #include "src/game/Camera.hpp"
 #include "src/game/State.hpp"
 #include "src/database/Context.hpp"
+#include "src/job/DeconstructItemTask.hpp"
+#include "src/job/FindPathTask.hpp"
+#include "src/job/FindItemMapTask.hpp"
+#include "src/job/ITask.hpp"
 
 #include <iostream>
 #include <list>
@@ -76,6 +80,7 @@ int main()
   searchTargetObj.Family = "Resource";
   searchTargetObj.Order = "Wood";
   searchTargetObj.Type = "Maple";
+  searchTargetObj.Form = "Tree";
   auto searchTarget = std::make_shared<Item::ItemIdentifier>(searchTargetObj);
   
   auto repo = Item::Repository(GameState);
@@ -91,25 +96,18 @@ int main()
     unit->currentPathIndex = 0;
     unit->inventory = std::shared_ptr<Inventory::InventoryContents>(new Inventory::InventoryContents);
     auto job = std::shared_ptr<job::Job>(new job::Job);
-    job::TaskRequest taskRequest3;
-    taskRequest3.Name = "RemoveItem";
-    taskRequest3.Grid = gridPtr;
-    taskRequest3.Identifier = searchTarget;
-    taskRequest3.Degree = std::make_shared<Item::MatchDegree>(Item::MatchDegree::ORDER);
     auto identifier = std::shared_ptr<Item::ItemIdentifier>(new Item::ItemIdentifier);
     identifier->Family = "Resource";
     identifier->Order = "Wood";
-    taskRequest3.Identifier = identifier;
-    job->TaskRequests.push_back(taskRequest3);
-    job::TaskRequest taskRequest2;
-    taskRequest2.Name = "FindPath";
-    taskRequest2.Grid = gridPtr;
-    job->TaskRequests.push_back(taskRequest2);
-    job::TaskRequest taskRequest;
-    taskRequest.Name = "FindContent";
-    taskRequest.Identifier = searchTarget;
-    taskRequest.Grid = gridPtr;
-    job->TaskRequests.push_back(taskRequest);
+    job::DeconstructItemTaskFactory dfact;
+    auto task3 = dfact.Create(identifier, std::make_shared<Item::MatchDegree>(Item::MatchDegree::ORDER), gridPtr, unit);
+    job->Tasks.push_back(task3); 
+    job::FindPathTaskFactory ffact;
+    auto task2 = ffact.Create(gridPtr, unit);
+    job->Tasks.push_back(task2);
+    job::FindItemMapTaskFactory ifact;
+    auto task = ifact.Create(gridPtr, unit, searchTarget);
+    job->Tasks.push_back(task);
     unit->jobs.push_back(job);
     unitList->push_back(unit);
   };

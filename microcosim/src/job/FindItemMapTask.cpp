@@ -12,6 +12,7 @@ namespace job {
     task.Grid = _grid;
     task.Unit = _unit;
     task.Content = _content;
+    task.Name = "FindItemMapTask";
     auto shared = std::make_shared<FindItemMapTask>(task);
     return shared;
   };
