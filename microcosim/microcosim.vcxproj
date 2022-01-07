@@ -357,6 +357,7 @@
     <ClCompile Include="src\item\Item.cpp" />
     <ClCompile Include="src\item\ItemIdentifier.cpp" />
     <ClCompile Include="src\item\Repository.cpp" />
+    <ClCompile Include="src\job\ChopTreeJobFactory.cpp" />
     <ClCompile Include="src\job\DeconstructItemTask.cpp" />
     <ClCompile Include="src\job\FindPathTask.cpp" />
     <ClCompile Include="src\job\JobManager.cpp" />
@@ -401,6 +402,7 @@
     <ClInclude Include="src\item\Item.hpp" />
     <ClInclude Include="src\item\ItemIdentifier.hpp" />
     <ClInclude Include="src\item\Repository.hpp" />
+    <ClInclude Include="src\job\ChopTreeJobFactory.hpp" />
     <ClInclude Include="src\job\DeconstructItemTask.hpp" />
     <ClInclude Include="src\job\FindItemMapTask.hpp" />
     <ClInclude Include="src\job\FindPathTask.hpp" />

@@ -23,6 +23,7 @@ namespace Movement {
 }
 
 namespace Units {
+  enum class Responsibility { CHOP, HAUL};
   class Unit {
     public:
       Unit();
@@ -39,6 +40,7 @@ namespace Units {
       std::shared_ptr<Inventory::InventoryContents> inventory;
       std::vector<std::shared_ptr<job::Job>> jobs;
       std::shared_ptr<job::ITask> currentTask;
+      std::vector<Units::Responsibility> Responsibilities;
       //Jobs::ITask* currentTask;
       void find_path();
       void set_next_move_time(double gameTime);

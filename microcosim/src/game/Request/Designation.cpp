@@ -7,20 +7,10 @@
 #include "src/item/Item.hpp"
 
 namespace game {
-  Designation::Designation(std::shared_ptr<Map::Grid> grid, game::DesignationType type) {
+  Designation::Designation(std::shared_ptr<Map::Grid> grid, game::DesignationType type, std::shared_ptr<Map::Tile> tile) {
     Grid = grid;
     Type = type;
-  }
-
-  void Designation::Execute() {
-    switch (Type) {
-    case game::DesignationType::CHOPTREE:
-      
-      break;
-    default:
-      break;
-
-    }
+    Tile = tile;
   }
 
   //job::Job Designation::createChopTreeJob() {}

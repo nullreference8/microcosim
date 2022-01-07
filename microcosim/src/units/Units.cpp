@@ -9,6 +9,8 @@
 namespace Units {
   Unit::Unit() {
     color = std::shared_ptr<Color>(new Color);
+    Responsibilities.push_back(Units::Responsibility::CHOP);
+    Responsibilities.push_back(Units::Responsibility::HAUL);
     currentTask = nullptr;
     *color = GRAY;
   }

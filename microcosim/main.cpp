@@ -24,6 +24,8 @@
 #include "src/job/FindPathTask.hpp"
 #include "src/job/FindItemMapTask.hpp"
 #include "src/job/ITask.hpp"
+#include "src/game/Request/Designation.hpp"
+#include "src/game/Request/DesignationType.hpp"
 
 #include <iostream>
 #include <list>
@@ -75,6 +77,8 @@ int main()
 
   Map::Grid grid(GameState);
   std::shared_ptr<Map::Grid> gridPtr = std::make_shared<Map::Grid>(grid);
+  game::Designation designation(gridPtr, game::DesignationType::CHOPTREE, std::make_shared<Map::Tile>(gridPtr->tileMap[11][16]));
+  GameState->Designations->push_back(designation);
 
   Item::ItemIdentifier searchTargetObj;
   searchTargetObj.Family = "Resource";
@@ -84,9 +88,9 @@ int main()
   auto searchTarget = std::make_shared<Item::ItemIdentifier>(searchTargetObj);
   
   auto repo = Item::Repository(GameState);
-  auto res = repo.SelectOrders(searchTargetObj);
+  //auto res = repo.SelectOrders(searchTargetObj);
 
-  auto unitList = std::shared_ptr<Units::UnitList>(new Units::UnitList);
+  std::list<std::shared_ptr<Units::Unit>> unitList;
   for (int i = 0; i < 1; i++)
   {
     auto unit = std::shared_ptr<Units::Unit>(new Units::Unit);
@@ -95,27 +99,14 @@ int main()
     unit->travelSpeedMPS = 1.00;
     unit->currentPathIndex = 0;
     unit->inventory = std::shared_ptr<Inventory::InventoryContents>(new Inventory::InventoryContents);
-    auto job = std::shared_ptr<job::Job>(new job::Job);
-    auto identifier = std::shared_ptr<Item::ItemIdentifier>(new Item::ItemIdentifier);
-    identifier->Family = "Resource";
-    identifier->Order = "Wood";
-    job::DeconstructItemTaskFactory dfact;
-    auto task3 = dfact.Create(identifier, std::make_shared<Item::MatchDegree>(Item::MatchDegree::ORDER), gridPtr, unit);
-    job->Tasks.push_back(task3); 
-    job::FindPathTaskFactory ffact;
-    auto task2 = ffact.Create(gridPtr, unit);
-    job->Tasks.push_back(task2);
-    job::FindItemMapTaskFactory ifact;
-    auto task = ifact.Create(gridPtr, unit, searchTarget);
-    job->Tasks.push_back(task);
-    unit->jobs.push_back(job);
-    unitList->push_back(unit);
+    
+    unitList.push_back(unit);
   };
+  GameState->Units = std::make_shared<std::list<std::shared_ptr<Units::Unit>>>(unitList);
 
   auto mov = std::shared_ptr<Movement::Generator>(new Movement::Generator);
 
-  job::ManagerFactory factory;
-  auto jm = factory.Create(tm);
+  job::Manager jm(tm);
 
   // Main game loop
   std::string keysPressed = "";
@@ -154,6 +145,7 @@ int main()
     // Controller
     mouse->UpdateMouse();
     keyboard->Update();
+    GameState->RunDesignations(gridPtr);
     
     // Grid
     gridPtr->UpdateMouseTracking(mouse);
@@ -162,9 +154,9 @@ int main()
     debugText.AppendDebugList(mouseDebugText);
 
     // Check unit jobs
-    for (auto &unit : *unitList)
+    for (auto &unit : unitList)
     {
-      jm->RunJobTasks(unit);
+      jm.RunJobTasks(unit);
       unit->check_and_move(mov, gameTime);
     }
     mov->MoveAllAndClear(gameTime);
@@ -228,7 +220,7 @@ int main()
 
 
       // Unit Loop
-      for (auto &unit : *unitList)
+      for (auto &unit : unitList)
       {
         if (unit->currentVector.y >= camera.GameCamera->target.y && unit->currentVector.x >= camera.GameCamera->target.x && unit->currentVector.y <= screenTileHeight && unit->currentVector.x <= screenTileWidth) {
           for (auto &pathVector : unit->path)

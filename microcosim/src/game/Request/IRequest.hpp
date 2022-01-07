@@ -4,9 +4,7 @@
 namespace game {
   class IRequest {
   public:
-    virtual void Execute() = 0;
-    virtual bool CheckComplete() = 0;
-    virtual bool CheckRunning() = 0;
+    virtual void QueueJob() = 0;
   };
 }
 #endif

@@ -4,10 +4,8 @@
 #include "src/job/Jobs.hpp"
 namespace job {
 
-  std::shared_ptr<job::Manager> ManagerFactory::Create(std::shared_ptr<Threading::Manager> _tm) {
-    job::Manager manager;
-    manager.tm = _tm;
-    return std::make_shared<job::Manager>(manager);
+  Manager::Manager(std::shared_ptr<Threading::Manager> tm) {
+    ThreadingManager = tm;
   };
 
   void Manager::RunJobTasks(std::shared_ptr<Units::Unit> unit) {
@@ -15,7 +13,7 @@ namespace job {
       auto task = unit->jobs.back()->Tasks.back();
       unit->currentTask = task;
       if (unit && unit->currentTask) {
-        tm->pool->push([unit](int threadId) { unit->currentTask->Action(); }); 
+        ThreadingManager->pool->push([unit](int threadId) { unit->currentTask->Action(); });
       }
     } else if (unit->currentTask && unit->currentTask->CheckComplete()) {
       if (unit->jobs.size() > 0) {
