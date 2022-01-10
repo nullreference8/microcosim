@@ -1,18 +1,19 @@
 #include "src/job/DeconstructItemTask.hpp"
 #include "src/units/Units.hpp"
+#include "src/game/State.hpp"
 #include "src/map/Map.hpp"
 #include "src/map/Tile.hpp"
 #include "src/item/ItemIdentifier.hpp"
 #include "src/item/Item.hpp"
 #include "src/inventory/Inventory.hpp"
 namespace job {
-  std::shared_ptr<job::ITask> DeconstructItemTaskFactory::Create(std::shared_ptr<Item::ItemIdentifier> item, std::shared_ptr<Item::MatchDegree> matchDegree, std::shared_ptr<Map::Grid> grid, std::shared_ptr<Units::Unit> unit) {
+  std::shared_ptr<job::ITask> DeconstructItemTaskFactory::Create(std::shared_ptr<Item::ItemIdentifier> item, std::shared_ptr<Item::MatchDegree> matchDegree, std::shared_ptr<game::State> gameState, std::shared_ptr<Units::Unit> unit) {
     DeconstructItemTask task;
     task.Name = "DeconstructItemTask";
     task.MatchDegree = matchDegree;
     task.Unit = unit;
     task.ItemIdentifier = item;
-    task.Grid = grid;
+    task.Grid = gameState->Grid;
     return std::make_shared<job::DeconstructItemTask>(task);
   }
 

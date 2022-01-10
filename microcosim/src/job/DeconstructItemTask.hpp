@@ -4,6 +4,10 @@
 #include <string>
 #include "src/job/ITask.hpp"
 
+namespace game {
+  class State;
+}
+
 namespace Units {
   class Unit;
 }
@@ -33,7 +37,7 @@ namespace job {
   };
   class DeconstructItemTaskFactory {
   public:
-    std::shared_ptr<job::ITask> Create(std::shared_ptr<Item::ItemIdentifier> item, std::shared_ptr<Item::MatchDegree> matchDegree, std::shared_ptr<Map::Grid> grid, std::shared_ptr<Units::Unit> unit);
+    std::shared_ptr<job::ITask> Create(std::shared_ptr<Item::ItemIdentifier> item, std::shared_ptr<Item::MatchDegree> matchDegree, std::shared_ptr<game::State> gameState, std::shared_ptr<Units::Unit> unit);
   };
 }
 

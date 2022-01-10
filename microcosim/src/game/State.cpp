@@ -7,6 +7,10 @@
 #include "src/job/ChopTreeJobFactory.hpp"
 #include "src/map/Map.hpp"
 #include "src/units/Units.hpp"
+#include "src/area/Storage.hpp"
+#include "src/inventory/Inventory.hpp"
+#include "src/item/ItemIdentifier.hpp"
+#include "src/job/AreaDropItemJobFactory.hpp"
 namespace game {
   State::State() {
     database::Context dbContext;
@@ -24,7 +28,7 @@ namespace game {
     return false;
   }
 
-  void State::RunDesignations(std::shared_ptr<Map::Grid> grid) {
+  void State::RunDesignations() {
     for (auto& des : *Designations)  {
       if (des.IsRunning){
         continue;
@@ -34,12 +38,31 @@ namespace game {
         auto unit = FindUnitByResponsibility(Units::Responsibility::CHOP);
         if (unit) {
           job::ChopTreeJobFactory fact;
-          des.AssignedUnit = unit;
-          auto job = fact.Create(grid, Units, std::make_shared<game::Designation>(des));
+            des.AssignedUnit = unit;
+          auto job = fact.Create(std::make_shared<game::State>(*this), std::make_shared<game::Designation>(des));
           unit->jobs.push_back(job);
           des.IsRunning = true;
         }
 
+      }
+    }
+  }
+
+  void State::CheckAreaItemDrop() {
+    for (auto& area : *Grid->Areas) {
+      if (area->AreaType == game::AreaType::STORAGE) {
+        auto storage = std::dynamic_pointer_cast<area::Storage>(area);
+        for (auto& unit : *Units) {
+          for (auto& content : *unit->inventory->Contents) {
+            auto itemIdentifier = content.second.back();
+            if (!itemIdentifier->MarkedForDrop && storage->AcceptsItem(*itemIdentifier)) {
+              job::AreaDropItemJobFactory afact;
+              auto job = afact.Create(std::make_shared<game::State>(*this), storage, unit, itemIdentifier);
+              unit->jobs.push_back(job);
+              itemIdentifier->MarkedForDrop = true;
+            }
+          }
+        }
       }
     }
   }

@@ -21,6 +21,11 @@ namespace area {
     virtual void AddTiles(std::vector<std::shared_ptr<Map::Tile>> tiles);
     virtual void RemoveTiles(std::vector<std::shared_ptr<Map::Tile>> tiles);
     virtual bool LookupTile(int X, int Y);
+    virtual std::shared_ptr<Map::Tile> GetOpenTile();
+    int x0;
+    int y0;
+    int x1;
+    int y1;
     std::string GetTileHashValue(std::shared_ptr<Map::Tile> tile);
   };  
 }

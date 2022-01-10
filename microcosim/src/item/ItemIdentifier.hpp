@@ -13,6 +13,7 @@ namespace Item {
       std::string Name;
 
       std::string GetHashString();
+      bool MarkedForDrop = false;
   };
 
 }

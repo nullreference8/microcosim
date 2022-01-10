@@ -6,7 +6,10 @@
 #include "src/area/Area.hpp"
 #include "src/area/Storage.hpp"
 #include "src/game/State.hpp"
+#include "src/game/Request/Designation.hpp"
+#include "src/game/Request/DesignationType.hpp"
 #include "raylib.h"
+#include <memory>
 #include <vector>
 #include <list>
 
@@ -154,7 +157,22 @@ namespace Map {
               SelectedArea = nullptr;
                           
             }
-          } 
+          }
+          else if (*GameState->_Mode == game::Mode::DESIGNATION) {
+            Item::ItemIdentifier itemIdentifier; 
+            itemIdentifier.Family = "Resource";
+            itemIdentifier.Order = "Wood";
+            itemIdentifier.Form = "Tree";
+            auto gridptr = std::make_shared<Map::Grid>(*this);
+            auto tile = std::make_shared<Map::Tile>(tileMap[MouseYIndex][MouseXIndex]);
+            for (auto& item : *tile->InventoryContents->Items) {
+              if (item->Match(itemIdentifier, Item::MatchDegree::FORM)){
+                game::Designation des(gridptr, game::DesignationType::CHOPTREE, tile);
+           
+                GameState->Designations->push_back(des);  
+              }
+            }
+          }
           
           SelectedTileXIndex = MouseXIndex;
           SelectedTileYIndex = MouseYIndex;

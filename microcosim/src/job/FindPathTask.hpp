@@ -9,9 +9,14 @@ namespace Units {
   class Unit;
 }
 
+namespace game {
+  class State;
+}
+
 namespace Map {
   class Grid;
 }
+
 
 namespace job {
   class FindPathTask : public ITask {
@@ -27,7 +32,7 @@ namespace job {
   };
   class FindPathTaskFactory {
   public:
-    std::shared_ptr<job::ITask> Create(std::shared_ptr<Map::Grid> _grid, std::shared_ptr<Units::Unit> _unit);
+    std::shared_ptr<job::ITask> Create(std::shared_ptr<game::State> gameState, std::shared_ptr<Units::Unit> _unit);
   };
 }
 

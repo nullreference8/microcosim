@@ -4,12 +4,13 @@
 #include "src/threading/ThreadManager.hpp"
 #include "src/item/ItemIdentifier.hpp"
 #include "src/map/Map.hpp"
+#include "src/game/State.hpp"
 #include <memory>
 
 namespace job {
-  std::shared_ptr<job::ITask> FindItemMapTaskFactory::Create(std::shared_ptr<Map::Grid> _grid, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _content) {
+  std::shared_ptr<job::ITask> FindItemMapTaskFactory::Create(std::shared_ptr<game::State> gameState, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _content) {
     FindItemMapTask task;
-    task.Grid = _grid;
+    task.Grid = gameState->Grid;
     task.Unit = _unit;
     task.Content = _content;
     task.Name = "FindItemMapTask";

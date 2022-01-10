@@ -22,6 +22,10 @@ namespace Movement {
   class Generator;
 }
 
+namespace game {
+  class State;
+}
+
 namespace Units {
   enum class Responsibility { CHOP, HAUL};
   class Unit {
@@ -45,6 +49,8 @@ namespace Units {
       void find_path();
       void set_next_move_time(double gameTime);
       void check_and_move(std::shared_ptr<Movement::Generator> mov, double gameTime);
+      void CheckDropItem(std::shared_ptr<game::State> gameState);
+      void ClearPath();
   };
   using UnitList = std::list<std::shared_ptr<Units::Unit>>;
 }

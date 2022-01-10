@@ -29,6 +29,7 @@ namespace gui {
 
       std::shared_ptr<gui::EnumButton<game::Mode>> ButtonSetModeNone;
       std::shared_ptr<gui::EnumButton<game::Mode>> ButtonSetModeEdit;
+      std::shared_ptr<gui::EnumButton<game::Mode>> ButtonSetModeDesignation;
 
       //Area Edit Mode Buttons
       std::shared_ptr<gui::EnumButton<game::AreaMode>> ButtonAreaModeNew;

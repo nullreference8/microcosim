@@ -1,5 +1,6 @@
 #include "src/area/Area.hpp"
 #include "src/map/Tile.hpp"
+#include "src/inventory/Inventory.hpp"
 #include <string>
 namespace area {
   bool BaseArea::LookupTile(int X, int Y) {
@@ -28,7 +29,17 @@ namespace area {
     }
   }
 
+  std::shared_ptr<Map::Tile> BaseArea::GetOpenTile() {
+    for (auto& tile : *Tiles) {
+      if (tile.second->InventoryContents->Items->size() == 0) {
+        return tile.second;
+      }
+    }
+    return nullptr;
+  }
+
   std::string BaseArea::GetTileHashValue(std::shared_ptr<Map::Tile> tile) {
     return "X" + std::to_string(tile->positionVector.x) + "Y" + std::to_string(tile->positionVector.y);
   }
+
 }

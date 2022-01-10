@@ -8,12 +8,16 @@ namespace Units {
   class Unit;
 }
 
-namespace Map {
-  class Grid;
+namespace game {
+  class State;
 }
 
 namespace Item {
   class ItemIdentifier;
+}
+
+namespace Map {
+  class Grid;
 }
 
 namespace job {
@@ -33,7 +37,7 @@ namespace job {
 
   class FindItemMapTaskFactory {
   public:
-    std::shared_ptr<job::ITask> Create(std::shared_ptr<Map::Grid> _grid, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _content);
+    std::shared_ptr<job::ITask> Create(std::shared_ptr<game::State> gameState, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _content);
   };
 }
 #endif

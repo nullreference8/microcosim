@@ -51,7 +51,17 @@ namespace Item {
         }
         if(this->Identifier->Type == identifier.Type) {
           //TODO: When item properties are implemented, exact match must be moved
-          if (degree == MatchDegree::TYPE || degree == MatchDegree::EXACT) {
+          if (degree == MatchDegree::TYPE) {
+            return true;
+          }
+        }
+        if (this->Identifier->Form == identifier.Form) {
+          if (degree == MatchDegree::FORM) {
+            return true;
+          }
+        }
+        if (this->Identifier->Form == identifier.Form || this->Identifier->Type == identifier.Type) {
+          if (degree == MatchDegree::EXACT) {
             return true;
           }
         }

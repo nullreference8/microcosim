@@ -28,7 +28,7 @@ namespace Map {
 }
 
 namespace game {
-  enum class Mode { NONE, EDIT };
+  enum class Mode { NONE, EDIT, DESIGNATION };
   enum class AreaMode { SELECT, EDIT, NEW };
   enum class AreaType { ROOM, STORAGE };
   enum class AreaEditMode { ADD, REMOVE };
@@ -45,11 +45,13 @@ namespace game {
       std::shared_ptr<std::unordered_map<gui::InterfaceName, Rectangle>> ActiveInterfaces;
       std::shared_ptr<database::Context> DbContext;
       std::shared_ptr<std::list<std::shared_ptr<Units::Unit>>> Units;
+      std::shared_ptr<Map::Grid> Grid;
       //TODO create a means to cleanup designation requests
       std::shared_ptr<std::list<game::Designation>> Designations = std::shared_ptr<std::list<game::Designation>>(new std::list<game::Designation>());
 
       bool ActiveInterfaceClicked(std::shared_ptr<Controller::Mouse> mouse);
-      void RunDesignations(std::shared_ptr<Map::Grid> grid);
+      void RunDesignations();
+      void CheckAreaItemDrop();
       std::shared_ptr<Units::Unit> FindUnitByResponsibility(Units::Responsibility responsibility);
   };
 }

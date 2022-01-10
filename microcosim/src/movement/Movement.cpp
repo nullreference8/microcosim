@@ -15,6 +15,7 @@ namespace Movement {
       int nextPathIndex = unit->currentPathIndex + 1;
       unit->currentVector = unit->path[nextPathIndex];
       unit->currentPathIndex = nextPathIndex;
+      unit->ClearPath();
       unit->set_next_move_time(gameTime);
     }
     unitsToUpdate.clear();

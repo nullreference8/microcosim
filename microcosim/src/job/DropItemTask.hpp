@@ -1,5 +1,5 @@
-#ifndef JOB_REMOVEITEMTASK_HPP
-#define JOB_REMOVEITEMTASK_HPP
+#ifndef JOB_DROPITEMTASK_HPP
+#define JOB_DROPITEMTASK_HPP
 #include <memory> 
 #include <string>
 #include "src/job/ITask.hpp"  
@@ -22,7 +22,7 @@ namespace Map {
 }
 
 namespace job {
-  class RemoveItemTask : public ITask {
+  class DropItemTask : public ITask {
   public:
     void Action();
     bool CheckComplete();
@@ -35,9 +35,9 @@ namespace job {
     bool IsComplete = false;
     bool IsRunning = false;
   };
-  class RemoveItemTaskFactory {
+  class DropItemTaskFactory {
   public:
-    std::shared_ptr<job::ITask> Create(std::shared_ptr<game::State> gameState, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _identifier, std::shared_ptr<Item::MatchDegree> _degree);
+    std::shared_ptr<job::ITask> Create(std::shared_ptr<game::State> gameState, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _identifier);
   };
 }
 #endif

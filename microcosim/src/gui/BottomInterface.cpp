@@ -34,6 +34,17 @@ namespace gui {
       LIGHTGRAY
     ));
 
+    Rectangle setModeButtonDesignationPosition = Position;
+    setModeButtonDesignationPosition.x = setModeButtonDesignationPosition.x + 100;
+    ButtonSetModeDesignation = std::shared_ptr<gui::EnumButton<game::Mode>>(new gui::EnumButton<game::Mode>(
+      GameState->_Mode,
+      game::Mode::DESIGNATION,
+      game::Mode::NONE,
+      setModeButtonDesignationPosition,
+      "Designation Mode",
+      LIGHTGRAY
+    ));
+
     Rectangle areaModeButton = Position;
     areaModeButton.x = areaModeButton.x + 100;
     ButtonAreaModeNew = std::shared_ptr<gui::EnumButton<game::AreaMode>>(new gui::EnumButton<game::AreaMode>(
@@ -103,8 +114,9 @@ namespace gui {
       ButtonAreaEditModeAdd->Draw(mouse);
       ButtonAreaEditModeRemove->Draw(mouse);
       ButtonAreaModeEdit->Draw(mouse);
-    } else if (*GameState->_Mode == game::Mode::NONE) {
+    } else if (*GameState->_Mode == game::Mode::NONE || *GameState->_Mode == game::Mode::DESIGNATION) {
       ButtonSetModeEdit->Draw(mouse);
+      ButtonSetModeDesignation->Draw(mouse);
     }
 
     (*GameState->ActiveInterfaces)[gui::InterfaceName::BOTTOM] = MouseBlockingPosition;

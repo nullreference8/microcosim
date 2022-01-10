@@ -4,13 +4,14 @@
 #include "src/threading/ThreadManager.hpp"
 #include "src/item/ItemIdentifier.hpp"
 #include "src/map/Map.hpp"
+#include "src/game/State.hpp"
 #include "src/item/Item.hpp"
 #include <memory>
 
 namespace job { 
-  std::shared_ptr<job::ITask> RemoveItemTaskFactory::Create(std::shared_ptr<Map::Grid> _grid, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _identifier, std::shared_ptr<Item::MatchDegree> _degree) {
+  std::shared_ptr<job::ITask> RemoveItemTaskFactory::Create(std::shared_ptr<game::State> gameState, std::shared_ptr<Units::Unit> _unit, std::shared_ptr<Item::ItemIdentifier> _identifier, std::shared_ptr<Item::MatchDegree> _degree) {
     RemoveItemTask task;
-    task.Grid = _grid;
+    task.Grid = gameState->Grid;
     task.Unit = _unit; 
     task.Identifier = _identifier; 
     task.Degree = _degree;

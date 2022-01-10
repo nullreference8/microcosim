@@ -77,8 +77,9 @@ int main()
 
   Map::Grid grid(GameState);
   std::shared_ptr<Map::Grid> gridPtr = std::make_shared<Map::Grid>(grid);
-  game::Designation designation(gridPtr, game::DesignationType::CHOPTREE, std::make_shared<Map::Tile>(gridPtr->tileMap[11][16]));
-  GameState->Designations->push_back(designation);
+  GameState->Grid = gridPtr;
+  //game::Designation designation(gridPtr, game::DesignationType::CHOPTREE, std::make_shared<Map::Tile>(gridPtr->tileMap[11][16]));
+  //GameState->Designations->push_back(designation);
 
   Item::ItemIdentifier searchTargetObj;
   searchTargetObj.Family = "Resource";
@@ -145,7 +146,7 @@ int main()
     // Controller
     mouse->UpdateMouse();
     keyboard->Update();
-    GameState->RunDesignations(gridPtr);
+    GameState->RunDesignations();
     
     // Grid
     gridPtr->UpdateMouseTracking(mouse);
@@ -158,7 +159,10 @@ int main()
     {
       jm.RunJobTasks(unit);
       unit->check_and_move(mov, gameTime);
+      //unit->CheckDropItem(GameState);
     }
+    //TODO:: This is bad, should handle in unit loop
+    GameState->CheckAreaItemDrop();
     mov->MoveAllAndClear(gameTime);
 
 
