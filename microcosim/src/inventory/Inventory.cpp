@@ -69,7 +69,9 @@ namespace Inventory {
   void InventoryContents::RemoveContent(Item::ItemIdentifier item) {
     std::string key = item.GetHashString();
     std::vector<std::shared_ptr<Item::ItemIdentifier>> contents = (*Contents)[key];
-    contents.pop_back();
+    if (contents.size() > 0) {
+      contents.pop_back();
+    }
     if (contents.size() == 0) {
       Contents->erase(key); 
     } else {

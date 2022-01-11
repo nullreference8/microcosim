@@ -158,7 +158,7 @@ namespace Map {
                           
             }
           }
-          else if (*GameState->_Mode == game::Mode::DESIGNATION) {
+          else if (*GameState->_Mode == game::Mode::DESIGNATION && !GameState->ActiveInterfaceClicked(mouse)) {
             Item::ItemIdentifier itemIdentifier; 
             itemIdentifier.Family = "Resource";
             itemIdentifier.Order = "Wood";
