@@ -11,7 +11,7 @@ namespace area {
     return false;
   }
 
-  void BaseArea::AddTiles(std::vector<std::shared_ptr<Map::Tile>> tiles) {
+  void BaseArea::AddTiles(std::vector<std::shared_ptr<map::Tile>> tiles) {
     for (auto tile : tiles) {
       std::string tileHashValue = GetTileHashValue(tile);
       if(Tiles->find(tileHashValue) == Tiles->end()) {
@@ -20,7 +20,7 @@ namespace area {
     }
   }
 
-  void BaseArea::RemoveTiles(std::vector<std::shared_ptr<Map::Tile>> tiles) {
+  void BaseArea::RemoveTiles(std::vector<std::shared_ptr<map::Tile>> tiles) {
     for (auto tile : tiles) {
       std::string tileHashValue = GetTileHashValue(tile);
       if(Tiles->find(tileHashValue) != Tiles->end()) {
@@ -29,7 +29,7 @@ namespace area {
     }
   }
 
-  std::shared_ptr<Map::Tile> BaseArea::GetOpenTile() {
+  std::shared_ptr<map::Tile> BaseArea::GetOpenTile() {
     for (auto& tile : *Tiles) {
       if (tile.second->InventoryContents->Items->size() == 0) {
         return tile.second;
@@ -38,7 +38,7 @@ namespace area {
     return nullptr;
   }
 
-  std::string BaseArea::GetTileHashValue(std::shared_ptr<Map::Tile> tile) {
+  std::string BaseArea::GetTileHashValue(std::shared_ptr<map::Tile> tile) {
     return "X" + std::to_string(tile->positionVector.x) + "Y" + std::to_string(tile->positionVector.y);
   }
 

@@ -22,7 +22,7 @@ namespace job {
   }
 
   bool DeconstructItemTask::CheckComplete() {
-    auto tileInventory = Grid->tileMap[Unit->currentVector.y][Unit->currentVector.x].InventoryContents;
+    auto tileInventory = Grid->TileMap[Unit->currentVector.y][Unit->currentVector.x].InventoryContents;
     if (Unit->currentVector == Unit->targetVector) {
       if (tileInventory->FindItemIndex(*ItemIdentifier, *MatchDegree) != -1) {
         auto item = tileInventory->RemoveItem(*ItemIdentifier, *MatchDegree);

@@ -24,7 +24,7 @@ namespace job {
   bool RemoveItemTask::CheckComplete() {
     if (!IsComplete) {
       if (Unit->currentVector.x == Unit->targetVector.x && Unit->currentVector.y == Unit->targetVector.y) {
-        std::shared_ptr<Item::BaseItem> item = Grid->tileMap[Unit->currentVector.y][Unit->currentVector.x].InventoryContents->RemoveItem(*Identifier, *Degree);
+        std::shared_ptr<Item::BaseItem> item = Grid->TileMap[Unit->currentVector.y][Unit->currentVector.x].InventoryContents->RemoveItem(*Identifier, *Degree);
         //std::shared_ptr<Item::Tree> treePtr = std::dynamic_pointer_cast<Item::Tree>(item);
         if (item) {
           Unit->inventory->AddItem(item);

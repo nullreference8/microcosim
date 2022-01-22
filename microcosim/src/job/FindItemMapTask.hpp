@@ -16,7 +16,7 @@ namespace Item {
   class ItemIdentifier;
 }
 
-namespace Map {
+namespace map {
   class Grid;
 }
 
@@ -29,7 +29,7 @@ namespace job {
     bool CheckRunning();
     std::string Name;
     std::shared_ptr<Units::Unit> Unit;
-    std::shared_ptr<Map::Grid> Grid;
+    std::shared_ptr<map::Grid> Grid;
     std::shared_ptr<Item::ItemIdentifier> Content;
     bool IsComplete = false;
     bool IsRunning = false;

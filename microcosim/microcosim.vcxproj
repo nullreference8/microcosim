@@ -366,6 +366,7 @@
     <ClCompile Include="src\job\RemoveItemTask.cpp" />
     <ClCompile Include="src\job\FindItemMapTask.cpp" />
     <ClCompile Include="src\job\UnitSetTargetTileTask.cpp" />
+    <ClCompile Include="src\map\Generator.cpp" />
     <ClCompile Include="src\map\Map.cpp" />
     <ClCompile Include="src\map\Tile.cpp" />
     <ClCompile Include="src\movement\Movement.cpp" />
@@ -415,6 +416,7 @@
     <ClInclude Include="src\job\Jobs.hpp" />
     <ClInclude Include="src\job\RemoveItemTask.hpp" />
     <ClInclude Include="src\job\UnitSetTargetTileTask.hpp" />
+    <ClInclude Include="src\map\Generator.hpp" />
     <ClInclude Include="src\map\Map.hpp" />
     <ClInclude Include="src\map\Tile.hpp" />
     <ClInclude Include="src\movement\Movement.hpp" />

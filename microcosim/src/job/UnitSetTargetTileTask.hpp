@@ -8,7 +8,7 @@ namespace Units {
   class Unit;
 }
 
-namespace Map {
+namespace map {
   class Tile;
 }
 
@@ -20,13 +20,13 @@ namespace job {
     bool CheckRunning();
     std::string Name;
     std::shared_ptr<Units::Unit> Unit;
-    std::shared_ptr<Map::Tile> Tile;
+    std::shared_ptr<map::Tile> Tile;
     bool IsComplete = false;
     bool IsRunning = false;
   };
   class UnitSetTargetTileTaskFactory {
   public:
-    std::shared_ptr<job::ITask> Create(std::shared_ptr<Map::Tile> tile, std::shared_ptr<Units::Unit> unit);
+    std::shared_ptr<job::ITask> Create(std::shared_ptr<map::Tile> tile, std::shared_ptr<Units::Unit> unit);
   };
 }
 

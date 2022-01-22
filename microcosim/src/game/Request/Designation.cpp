@@ -7,7 +7,7 @@
 #include "src/item/Item.hpp"
 
 namespace game {
-  Designation::Designation(std::shared_ptr<Map::Grid> grid, game::DesignationType type, std::shared_ptr<Map::Tile> tile) {
+  Designation::Designation(std::shared_ptr<map::Grid> grid, game::DesignationType type, std::shared_ptr<map::Tile> tile) {
     Grid = grid;
     Type = type;
     Tile = tile;

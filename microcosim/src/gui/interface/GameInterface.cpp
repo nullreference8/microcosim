@@ -6,7 +6,7 @@
 #include "src/map/Map.hpp"
 #include "src/controller/Mouse.hpp"
 namespace gui {
-  GameInterface::GameInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<Map::Grid> grid, int screenWidth, int screenHeight) {
+  GameInterface::GameInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<map::Grid> grid, int screenWidth, int screenHeight) {
     GameState = gameState;
     Grid = grid;
     ScreenWidth = screenWidth;

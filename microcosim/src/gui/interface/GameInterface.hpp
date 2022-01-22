@@ -12,7 +12,7 @@ namespace game {
   class State;
 }
 
-namespace Map {
+namespace map {
   class Grid;
 }
 
@@ -23,9 +23,9 @@ namespace gui {
   class EditInterface;
   class GameInterface{
     public:
-      GameInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<Map::Grid> grid, int screenWidth, int screenHeight);
+      GameInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<map::Grid> grid, int screenWidth, int screenHeight);
       std::shared_ptr<game::State> GameState;
-      std::shared_ptr<Map::Grid> Grid;
+      std::shared_ptr<map::Grid> Grid;
       int ScreenWidth = 0;
       int ScreenHeight = 0;
 

@@ -13,7 +13,7 @@ namespace game {
   class State;
 }
 
-namespace Map {
+namespace map {
   class Grid;
 }
 
@@ -26,7 +26,7 @@ namespace job {
     bool CheckRunning();
     std::string Name;
     std::shared_ptr<Units::Unit> Unit;
-    std::shared_ptr<Map::Grid> Grid;
+    std::shared_ptr<map::Grid> Grid;
     bool IsComplete = false;
     bool IsRunning = false;
   };

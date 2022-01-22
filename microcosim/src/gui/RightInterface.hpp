@@ -11,7 +11,7 @@ namespace Controller {
   class Mouse;
 }
 
-namespace Map {
+namespace map {
   class Grid;
 }
 
@@ -25,7 +25,7 @@ namespace gui {
 
   class RightInterface{
     public:
-      RightInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<Map::Grid> grid, int screenWidth, int screenHeight);
+      RightInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<map::Grid> grid, int screenWidth, int screenHeight);
 
       Rectangle Position;
 
@@ -35,7 +35,7 @@ namespace gui {
       int RightInterfaceEndY;
 
       std::shared_ptr<game::State> GameState;
-      std::shared_ptr<Map::Grid> Grid;
+      std::shared_ptr<map::Grid> Grid;
       std::shared_ptr<Item::Repository> ItemRepo;
       std::shared_ptr<std::vector<Item::ItemIdentifier>> Families;
 

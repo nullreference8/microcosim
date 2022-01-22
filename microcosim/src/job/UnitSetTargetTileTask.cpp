@@ -2,7 +2,7 @@
 #include "src/units/Units.hpp"
 #include "src/map/Tile.hpp"
 namespace job {
-  std::shared_ptr<job::ITask> UnitSetTargetTileTaskFactory::Create(std::shared_ptr<Map::Tile> tile, std::shared_ptr<Units::Unit> unit) {
+  std::shared_ptr<job::ITask> UnitSetTargetTileTaskFactory::Create(std::shared_ptr<map::Tile> tile, std::shared_ptr<Units::Unit> unit) {
     UnitSetTargetTileTask task;
     task.Name = "UnitSetTargetTileTask";
     task.Tile = tile;

@@ -23,16 +23,15 @@ namespace game {
   class State;
 }
 
-namespace Map { 
+namespace map { 
   class Grid {
     public:
       Grid(std::shared_ptr<game::State> gameState); 
-      TileRow tileRow;
-      TileMap tileMap;
+      std::vector<std::vector<map::Tile>> TileMap;
       int TileSize = 20;
       std::vector<std::vector<int>> mapData;
       std::shared_ptr<std::vector<std::shared_ptr<area::BaseArea>>> Areas = std::shared_ptr<std::vector<std::shared_ptr<area::BaseArea>>>(new std::vector<std::shared_ptr<area::BaseArea>>());
-      std::shared_ptr<std::vector<std::shared_ptr<Map::Tile>>> SelectedTiles = std::shared_ptr<std::vector<std::shared_ptr<Map::Tile>>>(new std::vector<std::shared_ptr<Map::Tile>>());
+      std::shared_ptr<std::vector<std::shared_ptr<map::Tile>>> SelectedTiles = std::shared_ptr<std::vector<std::shared_ptr<map::Tile>>>(new std::vector<std::shared_ptr<map::Tile>>());
       //Selected BaseArea. Returns nullptr if no area selected
       std::shared_ptr<area::BaseArea> SelectedArea;
       AStar::Generator astarPathing;

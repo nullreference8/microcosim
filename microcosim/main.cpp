@@ -4,6 +4,7 @@
 #include "src/threading/ThreadManager.hpp"
 #include "src/inventory/Inventory.hpp"
 #include "src/map/Map.hpp"
+#include "src/map/Generator.hpp"
 #include "src/job/Jobs.hpp"
 #include "src/job/JobManager.hpp"
 #include "src/item/ItemIdentifier.hpp"
@@ -33,6 +34,7 @@
 
 int main()
 {
+  
   auto GameState = std::shared_ptr<game::State>(new game::State);
   game::Camera camera;
 
@@ -75,10 +77,12 @@ int main()
 
   SetTargetFPS(60);
 
-  Map::Grid grid(GameState);
-  std::shared_ptr<Map::Grid> gridPtr = std::make_shared<Map::Grid>(grid);
+  map::Grid grid(GameState);
+  map::Generator gen(8);
+  grid.TileMap = gen.Generate();
+  std::shared_ptr<map::Grid> gridPtr = std::make_shared<map::Grid>(grid);
   GameState->Grid = gridPtr;
-  //game::Designation designation(gridPtr, game::DesignationType::CHOPTREE, std::make_shared<Map::Tile>(gridPtr->tileMap[11][16]));
+  //game::Designation designation(gridPtr, game::DesignationType::CHOPTREE, std::make_shared<map::Tile>(gridPtr->TileMap[11][16]));
   //GameState->Designations->push_back(designation);
 
   Item::ItemIdentifier searchTargetObj;
@@ -192,29 +196,41 @@ int main()
       //BeginMode2D(camera.Camera2D);
       int screenTileWidth = GetScreenWidth() / tileSize;
       int screenTileHeight = GetScreenHeight() / tileSize;
-      for (int x = camera.GameCamera->target.x; x < screenTileWidth; x++) {
-        for (int y = camera.GameCamera->target.y; y < screenTileHeight; y++) {
-          if (y < static_cast<int>(gridPtr->tileMap.size()) && x < static_cast<int>(gridPtr->tileMap[y].size())){
-            auto &tile = gridPtr->tileMap[y][x];
+      for (int x = 0; x < screenTileWidth; x++) {
+        for (int y = 0; y < screenTileHeight; y++) {
+          int yIndex = y + camera.GameCamera->target.y;
+          int xIndex = x + camera.GameCamera->target.x;
+          if (yIndex < static_cast<int>(gridPtr->TileMap.size()) && xIndex < static_cast<int>(gridPtr->TileMap[y].size())){
+            auto &tile = gridPtr->TileMap[yIndex][xIndex];
+
             if (tile.IsSelected)
             {
-              DrawRectangle(tile.positionVector.x * tileSize, tile.positionVector.y * tileSize, tileSize, tileSize, LIME);
+              DrawRectangle(x * tileSize, y * tileSize, tileSize, tileSize, LIME);
             }
             else if (tile.isStorage)
             {
-              DrawRectangle(tile.positionVector.x * tileSize, tile.positionVector.y * tileSize, tileSize, tileSize, BLUE);
+              DrawRectangle(x * tileSize, y * tileSize, tileSize, tileSize, BLUE);
             }
             else if (tile.isWall)
             {
-              DrawRectangle(tile.positionVector.x * tileSize, tile.positionVector.y * tileSize, tileSize, tileSize, BLACK);
+              DrawRectangle(x * tileSize, y * tileSize, tileSize, tileSize, BLACK);
             }
             else if (tile.InventoryContents->HasContent(searchTargetObj))
             {
-              DrawRectangle(tile.positionVector.x * tileSize, tile.positionVector.y * tileSize, tileSize, tileSize, GREEN);
+              DrawRectangle(x * tileSize, y * tileSize, tileSize, tileSize, GREEN);
             }
             else
             {
-              DrawRectangle(tile.positionVector.x * tileSize, tile.positionVector.y * tileSize, tileSize, tileSize, RAYWHITE);
+              if (tile.Elevation > 255) {
+                tile.Elevation = 255;
+              }
+              else if (tile.Elevation < 0) {
+                tile.Elevation = 0;
+              }
+              auto co = Color{
+                0, 0, (unsigned char)(tile.Elevation * 20), 255
+              };
+              DrawRectangle(x * tileSize, y * tileSize, tileSize, tileSize, co);
             }
             
           }

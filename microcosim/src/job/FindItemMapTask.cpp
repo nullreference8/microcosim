@@ -19,7 +19,7 @@ namespace job {
   };
   void FindItemMapTask::Action() {
     IsRunning = true;
-    Map::Tile* res = Grid->FindNearest(Unit->currentVector.x, Unit->currentVector.y, *Content);
+    map::Tile* res = Grid->FindNearest(Unit->currentVector.x, Unit->currentVector.y, *Content);
     if (res != NULL) {
       Unit->targetVector.x = res->positionVector.x;
       Unit->targetVector.y = res->positionVector.y;
@@ -27,8 +27,8 @@ namespace job {
   };
   bool FindItemMapTask::CheckComplete() {
     if (!IsComplete) {
-      auto tileMap = Grid->tileMap;
-      bool foundGridVector = tileMap[Unit->targetVector.y][Unit->targetVector.x].InventoryContents->HasContent(*Content);
+      auto TileMap = Grid->TileMap;
+      bool foundGridVector = TileMap[Unit->targetVector.y][Unit->targetVector.x].InventoryContents->HasContent(*Content);
       if (foundGridVector) {
         IsComplete = true;
         IsRunning = false;

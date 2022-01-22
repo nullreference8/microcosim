@@ -3,6 +3,19 @@
 namespace Controller {
   void Keyboard::Update() {
     reset();
+    if (IsKeyDown(KEY_LEFT)) {
+      IsCameraLeftPressed = true;
+    }
+    if (IsKeyDown(KEY_RIGHT)) {
+      IsCameraRightPressed = true;
+    }
+    if (IsKeyDown(KEY_UP)) {
+      IsCameraUpPressed = true;
+    }
+    if (IsKeyDown(KEY_DOWN)) {
+      IsCameraDownPressed = true;
+    }
+    /*
     int res = GetKeyPressed();
     while (res != 0) {
       if (res == KEY_LEFT) {
@@ -16,7 +29,7 @@ namespace Controller {
       }
 
       res = GetKeyPressed();
-    }
+    }*/
   };
 
   void Keyboard::reset() {

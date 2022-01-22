@@ -12,7 +12,7 @@
 #include "src/gui/interface/GameInterface.hpp"
 #include "src/gui/StorageFilterButton.hpp"
 namespace gui {
-  RightInterface::RightInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<Map::Grid> grid, int screenWidth, int screenHeight) {
+  RightInterface::RightInterface(std::shared_ptr<game::State> gameState, std::shared_ptr<map::Grid> grid, int screenWidth, int screenHeight) {
     Position.width = 300;
     Position.x = screenWidth - Position.width;
     Position.y = 0;

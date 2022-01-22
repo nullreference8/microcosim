@@ -28,7 +28,7 @@ namespace job {
         for (auto& item : *Unit->inventory->Items) {
           if (item->Match(*Identifier, *Degree)) {
             auto removed = Unit->inventory->RemoveItem(*Identifier, *Degree);
-            Grid->tileMap[Unit->currentVector.y][Unit->currentVector.x].InventoryContents->AddItem(removed);
+            Grid->TileMap[Unit->currentVector.y][Unit->currentVector.x].InventoryContents->AddItem(removed);
             IsComplete = true;
             IsRunning = false;
           }

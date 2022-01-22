@@ -6,7 +6,7 @@
 #include <string> 
 #include <memory>  
 
-namespace Map {
+namespace map {
   class Grid;
   class Tile;
 }
@@ -24,9 +24,9 @@ namespace game {
   enum class DesignationType;
   class Designation {
   public:
-    Designation(std::shared_ptr<Map::Grid> grid, game::DesignationType type, std::shared_ptr<Map::Tile> tile);
-    std::shared_ptr<Map::Grid> Grid;
-    std::shared_ptr<Map::Tile> Tile;
+    Designation(std::shared_ptr<map::Grid> grid, game::DesignationType type, std::shared_ptr<map::Tile> tile);
+    std::shared_ptr<map::Grid> Grid;
+    std::shared_ptr<map::Tile> Tile;
     game::DesignationType Type;
     std::shared_ptr<Units::Unit> AssignedUnit;
     bool IsRunning = false;

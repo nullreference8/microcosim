@@ -5,6 +5,10 @@
 #include <vector>
 #include <string>
 
+namespace area {
+  class Workshop;
+}
+
 namespace Item {
   class ItemIdentifier;
   enum class MatchDegree { FAMILY, ORDER, TYPE, FORM, EXACT };
@@ -15,6 +19,10 @@ namespace Item {
       virtual bool Match(Item::ItemIdentifier identifier, MatchDegree degree);
   };
 
+  class Tool : public BaseItem {
+  public:
+    std::shared_ptr<area::Workshop> AssignedWorkshop;
+  };
 
   class Resource : public BaseItem {
     public:

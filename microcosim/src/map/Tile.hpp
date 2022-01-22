@@ -9,7 +9,7 @@ namespace Inventory {
   class InventoryContents;
 }
 
-namespace Map {
+namespace map {
   
   class Tile {
     public:
@@ -18,12 +18,10 @@ namespace Map {
       bool isWood = false;
       bool isStorage = false;
       bool IsSelected = false;
+      int Elevation = 0;
       AStar::Vec2i positionVector; 
       Inventory::InventoryContents *InventoryContents;
   };
-
-  using TileRow = std::vector<Tile>;
-  using TileMap = std::vector<TileRow>;
 
 };
 #endif

@@ -23,7 +23,7 @@ namespace Units {
   enum class Responsibility;
 }
 
-namespace Map {
+namespace map {
   class Grid;
 }
 
@@ -45,7 +45,7 @@ namespace game {
       std::shared_ptr<std::unordered_map<gui::InterfaceName, Rectangle>> ActiveInterfaces;
       std::shared_ptr<database::Context> DbContext;
       std::shared_ptr<std::list<std::shared_ptr<Units::Unit>>> Units;
-      std::shared_ptr<Map::Grid> Grid;
+      std::shared_ptr<map::Grid> Grid;
       //TODO create a means to cleanup designation requests
       std::shared_ptr<std::list<game::Designation>> Designations = std::shared_ptr<std::list<game::Designation>>(new std::list<game::Designation>());
 

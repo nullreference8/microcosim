@@ -4,7 +4,7 @@
 #include <string>
 #include <memory>
 
-namespace Map {
+namespace map {
   class Grid;
 }
 

@@ -13,10 +13,10 @@
 #include <vector>
 #include <list>
 
-namespace Map {
+namespace map {
     Grid::Grid(std::shared_ptr<game::State> gameState) {
       GameState = gameState;
-      mapData = 
+      /*mapData =
       { 
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -39,13 +39,13 @@ namespace Map {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-      };
+      };*/
       astarPathing.setWorldSize({20, 20});
       astarPathing.setHeuristic(AStar::Heuristic::euclidean);
       astarPathing.setDiagonalMovement(true);
       int tileY = 0;
       for (auto const& i : mapData) {
-        tileRow = TileRow{};
+        auto tileRow = std::vector<map::Tile>{};
         int tileX = 0;
 
         for (auto const& k : i) {
@@ -82,7 +82,7 @@ namespace Map {
           tileX = tileX + 1;
         }
         
-        tileMap.push_back(tileRow);
+        TileMap.push_back(tileRow);
         tileY = tileY + 1;
       };
       
@@ -101,22 +101,22 @@ namespace Map {
         while (!found && !exceedMap) {
           //Might be able to do this with 1 for loop 
           for(int x = startX; x <= bounds[3]; x++) {
-            if (tileMap[bounds[0]][x].InventoryContents->HasContent(item)) {
-              tilesFound.push_back(tileMap[bounds[0]][x]);
+            if (TileMap[bounds[0]][x].InventoryContents->HasContent(item)) {
+              tilesFound.push_back(TileMap[bounds[0]][x]);
               found = true;
             }
-            if (tileMap[bounds[1]][x].InventoryContents->HasContent(item)) {
-              tilesFound.push_back(tileMap[bounds[1]][x]);
+            if (TileMap[bounds[1]][x].InventoryContents->HasContent(item)) {
+              tilesFound.push_back(TileMap[bounds[1]][x]);
               found = true;
             }
           }
           for (int y = startY; y <= bounds[1]; y++) {
-            if (tileMap[y][bounds[3]].InventoryContents->HasContent(item)) {
-              tilesFound.push_back(tileMap[y][bounds[3]]);
+            if (TileMap[y][bounds[3]].InventoryContents->HasContent(item)) {
+              tilesFound.push_back(TileMap[y][bounds[3]]);
               found = true;
             }
-            if (tileMap[y][bounds[2]].InventoryContents->HasContent(item)) {
-              tilesFound.push_back(tileMap[y][bounds[2]]);
+            if (TileMap[y][bounds[2]].InventoryContents->HasContent(item)) {
+              tilesFound.push_back(TileMap[y][bounds[2]]);
               found = true;
             }
           }
@@ -132,7 +132,7 @@ namespace Map {
           return NULL;
         } else {
           auto res = tilesFound.front();
-          return &tileMap[res.positionVector.y][res.positionVector.x];
+          return &TileMap[res.positionVector.y][res.positionVector.x];
         }
       };
 
@@ -163,8 +163,8 @@ namespace Map {
             itemIdentifier.Family = "Resource";
             itemIdentifier.Order = "Wood";
             itemIdentifier.Form = "Tree";
-            auto gridptr = std::make_shared<Map::Grid>(*this);
-            auto tile = std::make_shared<Map::Tile>(tileMap[MouseYIndex][MouseXIndex]);
+            auto gridptr = std::make_shared<map::Grid>(*this);
+            auto tile = std::make_shared<map::Tile>(TileMap[MouseYIndex][MouseXIndex]);
             for (auto& item : *tile->InventoryContents->Items) {
               if (item->Match(itemIdentifier, Item::MatchDegree::FORM)){
                 game::Designation des(gridptr, game::DesignationType::CHOPTREE, tile);
@@ -195,10 +195,10 @@ namespace Map {
       void Grid::selectTiles() {
         for(int i = StartX; i <= EndX; i++) {
           for(int j = StartY; j <= EndY; j++) {
-            if (i < 0 || i > tileMap.size() || j < 0 || j > tileMap[i].size()) {
+            if (i < 0 || i > TileMap.size() || j < 0 || j > TileMap[i].size()) {
               continue;
             } 
-            auto tilePtr = std::make_shared<Map::Tile>(tileMap[j][i]);
+            auto tilePtr = std::make_shared<map::Tile>(TileMap[j][i]);
             SelectedTiles->push_back(tilePtr);
 
           }
@@ -266,8 +266,8 @@ namespace Map {
       std::tuple<std::vector<int>, bool> Grid::expandSearch(int startX, int startY, int distance) {
         std::vector<int> results;
 
-        int mapIndexLimitY = tileMap.size() - 1;
-        int mapIndexLimitX = tileMap[0].size() - 1;
+        int mapIndexLimitY = TileMap.size() - 1;
+        int mapIndexLimitX = TileMap[0].size() - 1;
         int top = startX - distance;
         bool exceedTop = false;
         bool exceedBottom = false;
